@@ -136,8 +136,6 @@ def get_spotify_track(
     response = requests.get(url, headers=headers)
     track_details = response.json()
 
-    print(track_details)
-
     track_data = {
         "id": track_details['tracks']['items'][0]['id'], 
         'external_url': track_details['tracks']['items'][0]['external_urls']['spotify']
