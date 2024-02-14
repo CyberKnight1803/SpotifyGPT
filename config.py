@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Website 
+HOST = '0.0.0.0'
+PORT = 8000
+
 BASE_URI = "http://localhost:8000"
 
 # OpenAI keys 

@@ -1,10 +1,15 @@
 import os 
 
 from fastapi import FastAPI
-from dotenv import load_dotenv
+import uvicorn
 
 from src.openai import router as openai_router
 from src.spotify import router as spotify_router
+
+from config import (
+    HOST, 
+    PORT
+)
 
 
 # Create FastAPI app instance 
@@ -24,3 +29,7 @@ async def api_health_check():
     return {
         "message": "FastAPI is working correctly"
     } 
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host=HOST, port=PORT, reload=True)
