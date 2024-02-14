@@ -7,9 +7,6 @@ from src.openai import router as openai_router
 from src.spotify import router as spotify_router
 
 
-# Load env 
-load_dotenv()
-
 # Create FastAPI app instance 
 app = FastAPI()
 

@@ -24,12 +24,6 @@ STATE_KEY = "spotify_auth_state"
 REDIRECT_URI = BASE_URI + "/spotify/callback"
 
 
-# Client Authentication 
-class SpotifyClientAuth(BaseModel):
-    client_id: str 
-    client_secret: str
-
-
 # Create router 
 router = APIRouter(
     prefix="/spotify"
