@@ -59,7 +59,7 @@ async def get_suggestions(query: Query):
     
     return JSONResponse(content=jsonable_encoder(tracks))
 
-
+# Create playlist
 @router.post("/create-playlist")
 async def create_playlist():
     pass 
