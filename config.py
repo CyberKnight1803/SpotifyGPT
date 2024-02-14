@@ -8,7 +8,7 @@ load_dotenv()
 HOST = '0.0.0.0'
 PORT = 8000
 
-BASE_URI = "http://localhost:8000"
+BASE_URI = os.getenv("BASE_URI")
 
 # OpenAI keys 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
