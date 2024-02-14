@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Website 
-BASE_URI = os.getenv("BASE_URI")
+BASE_URI = "http://localhost:8000"
 
 # OpenAI keys 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -13,6 +13,6 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 # Spotify keys
 SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
 SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
-SPOTIFY_AUTH_URL = os.getenv("SPOTIFY_AUTH_URL")
-SPOTIFY_TOKEN_URL = os.getenv("SPOTIFY_TOKEN_URL")
-SPOTIFY_BASE_URL = os.getenv("SPOTIFY_BASE_URL")
+SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
+SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
+SPOTIFY_BASE_URL = "https://api.spotify.com/v1/"
