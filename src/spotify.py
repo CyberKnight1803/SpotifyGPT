@@ -22,6 +22,8 @@ from config import (
 
 STATE_KEY = "spotify_auth_state"
 REDIRECT_URI = BASE_URI + "/spotify/callback"
+SEARCH_TYPE = "track"
+SEARCH_LIMIT = 1
 
 
 # Create router 
@@ -111,6 +113,34 @@ async def callback(request: Request, response: Response):
             raise HTTPException(status_code=400, detail="Error in getting Spotify token")    
 
 
-@router.post("/api/search")
-async def search_spotify():
-    pass 
+def get_spotify_track(
+        track_name: str, 
+        artist_name: str, 
+        access_token: str, 
+        type: str = SEARCH_TYPE, 
+        limit: int = SEARCH_LIMIT
+    ):
+
+    params = {
+        "q": f"{track_name}%{artist_name}", 
+        "type": type, 
+        "limit": limit
+    }
+
+    headers = {
+        "Authorization": f"Authorization: Bearer {access_token}"
+    }
+
+    url = SPOTIFY_BASE_URL + "/search" + "?" + urlencode(params)
+
+    response = requests.get(url, headers=headers)
+    track_details = response.json()
+
+    print(track_details)
+
+    track_data = {
+        "id": track_details['tracks']['items'][0]['id'], 
+        'external_url': track_details['tracks']['items'][0]['external_urls']['spotify']
+    }
+
+    return track_data    

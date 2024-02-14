@@ -3,7 +3,7 @@ import os
 from fastapi import FastAPI
 import uvicorn
 
-from src.openai import router as openai_router
+from src.api import router as api_router
 from src.spotify import router as spotify_router
 
 from config import (
@@ -16,7 +16,7 @@ from config import (
 app = FastAPI()
 
 # Add Routers 
-app.include_router(openai_router)
+app.include_router(api_router)
 app.include_router(spotify_router)
 
 
