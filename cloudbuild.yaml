@@ -3,13 +3,13 @@ steps:
     args:
       - build
       - '-t'
-      - 'gcr.io/$PROJECT_ID/SpotifyGPT:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/spotifygpt:$COMMIT_SHA'
       - .
     id: Build Container Image
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - 'gcr.io/$PROJECT_ID/SpotifyGPT:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/spotifygpt:$COMMIT_SHA'
     id: Push Image to Container Registry
   - name: gcr.io/cloud-builders/gcloud
     args:
@@ -17,11 +17,11 @@ steps:
       - deploy
       - spotifygpt
       - '--image'
-      - 'gcr.io/$PROJECT_ID/SpotifyGPT:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/spotifygpt:$COMMIT_SHA'
       - '--region'
-      - 'us-central1 (Iowa)'
+      - us-central1
       - '--platform'
       - managed
     id: Deploy Container on Google Cloud Run
 images:
-  - 'gcr.io/$PROJECT_ID/SpotifyGPT:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/spotifygpt:$COMMIT_SHA'
