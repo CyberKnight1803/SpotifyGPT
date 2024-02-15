@@ -3,7 +3,7 @@ FROM python:3.9-buster
 
 # copy necessary files for the container
 COPY requirements.txt .
-COPY src/ .
+COPY src/ src/
 COPY main.py .
 
 
