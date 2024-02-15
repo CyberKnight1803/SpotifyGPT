@@ -10,8 +10,6 @@ steps:
     args:
       - push
       - 'gcr.io/$PROJECT_ID/spotifygpt:$COMMIT_SHA'
-    options:
-      logging: CLOUD_LOGGING_ONLY
     id: Push Image to Container Registry
   - name: gcr.io/cloud-builders/gcloud
     args:
