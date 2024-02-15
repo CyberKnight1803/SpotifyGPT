@@ -12,4 +12,4 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 # finally run the application inside the container 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD exec uvicorn app.main:app --workers 1 --timeout-keep-alive 0 --port 8000 --host 0.0.0.0
