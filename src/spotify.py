@@ -1,9 +1,10 @@
-import os
 import base64
+import json
 import requests
+from typing import List
 from urllib.parse import urlencode
+from pydantic import BaseModel
 
-from pydantic import BaseModel 
 from fastapi import APIRouter, HTTPException, Request, Response
 from fastapi.responses import RedirectResponse
 
@@ -106,11 +107,34 @@ async def callback(request: Request, response: Response):
         api_response = requests.post(SPOTIFY_TOKEN_URL, data=form_data, headers=header)
         if api_response.status_code == 200:
             data = api_response.json()
+
+            # print(type(data))
+
+            url = SPOTIFY_BASE_URL + "/me"
+            headers = {
+                "Authorization": f"Authorization: Bearer {data['access_token']}" 
+            }
+
+            user_data_response = requests.get(url, headers=headers)
+            user_data = user_data_response.json()
+
+            data.update({'name': user_data['display_name']})
+            data.update({'email': user_data['email']})
+            data.update({'user_id': user_data['id']})
+            data.update({'user_profile': user_data['external_urls']['spotify']})
             return data
 
         else:
             # State value is not same => Stop the process and throw error 
             raise HTTPException(status_code=400, detail="Error in getting Spotify token")    
+
+
+
+class SpotifyPlaylist(BaseModel):
+    user_id: str
+    name: str 
+    track_ids: List[str]
+    access_token: str
 
 
 def get_spotify_track(
@@ -142,3 +166,59 @@ def get_spotify_track(
     }
 
     return track_data    
+
+
+def create_spotify_playlist(
+        user_id: str,
+        playlist_name: str, 
+        access_token: str
+    ):
+    
+    data = {
+        "name": playlist_name, 
+        "public": False
+    } 
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Authorization: Bearer {access_token}"
+    }
+
+    url = SPOTIFY_BASE_URL + f"/users/{user_id}/playlists"
+
+    response = requests.post(url, data=json.dumps(data), headers=headers)
+    playlist_data = response.json()
+
+    
+    playlist = {
+        'id': playlist_data['id'], 
+        'link': playlist_data['external_urls']['spotify']
+    }
+
+    return playlist
+
+def add_songs(
+        playlist_id: str, 
+        track_ids: List[str], 
+        access_token: str
+    ):
+
+    uris = []
+    for track_id in track_ids:
+        uris.append(f"spotify:track:{track_id}")
+    
+    data = {
+        "uris": uris, 
+    }
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Authorization: Bearer {access_token}"
+    }
+
+    url = SPOTIFY_BASE_URL + f"/playlists/{playlist_id}/tracks"
+
+    snapshot_id = requests.post(url, data=json.dumps(data), headers=headers)
+    return snapshot_id 
+
+

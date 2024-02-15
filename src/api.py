@@ -9,7 +9,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.responses import RedirectResponse, JSONResponse
 
 from src.openai import get_gpt4_suggestions, Query
-from src.spotify import get_spotify_track
+from src.spotify import get_spotify_track, create_spotify_playlist, add_songs, SpotifyPlaylist
 
 # Create router 
 router = APIRouter(
@@ -34,9 +34,6 @@ async def login():
 def refresh_token():
     pass 
 
-@router.get("/get-user-profile")
-def get_user_profile():
-    pass 
 
 @router.post("/suggestions")
 async def get_suggestions(query: Query):
@@ -61,9 +58,23 @@ async def get_suggestions(query: Query):
 
 # Create playlist -
 @router.post("/create-playlist")
-async def create_playlist():
-    pass 
+async def create_playlist(playlist: SpotifyPlaylist):
+    """
+        Create plaulist on spotify for user
+    """ 
+    
+    # Create playlist
+    playlist_details = create_spotify_playlist(
+        user_id=playlist.user_id, 
+        playlist_name=playlist.name, 
+        access_token=playlist.access_token
+    )
 
+    # Add songs to playlist
+    snapshot_id = add_songs(
+        playlist_id=playlist_details['id'], 
+        track_ids=playlist.track_ids,
+        access_token=playlist.access_token
+    )
 
-
-
+    return playlist_details['link']

@@ -28,6 +28,7 @@ def get_gpt4_suggestions(user_prompt: str, num_suggestions: int):
     system_prompt = """
     You are the best Spotify song recommender this world has ever seen. 
     You accurately understand the user's feelings and desire to hear the type of songs from his request and you suggest the best songs which could be turned into the best playlist.
+    You only recommend songs available on spotify.
     """
 
     # Prompt to get suggestions
