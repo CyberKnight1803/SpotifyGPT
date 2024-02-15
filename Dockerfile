@@ -4,6 +4,8 @@ FROM python:3.9-buster
 # copy necessary files for the container
 COPY requirements.txt .
 COPY src/ src/
+COPY config.py .
+COPY utils.py .
 COPY main.py .
 
 
