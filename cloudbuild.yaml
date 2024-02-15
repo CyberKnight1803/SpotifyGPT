@@ -23,7 +23,7 @@ steps:
       - '--platform'
       - managed
     id: Deploy Container on Google Cloud Run
-images:
-  - 'gcr.io/$PROJECT_ID/spotifygpt:$COMMIT_SHA'
 options:
   logging: CLOUD_LOGGING_ONLY
+images:
+  - 'gcr.io/$PROJECT_ID/spotifygpt:$COMMIT_SHA'
