@@ -160,9 +160,17 @@ def get_spotify_track(
     response = requests.get(url, headers=headers)
     track_details = response.json()
 
+    # Process artists 
+    artists = []
+    for artist in track_details['tracks']['items'][0]['artists']:
+        artists.append(artist['name'])
+
     track_data = {
         "id": track_details['tracks']['items'][0]['id'], 
-        'external_url': track_details['tracks']['items'][0]['external_urls']['spotify']
+        "name": track_details['tracks']['items'][0]['name'],
+        "artists": artists,
+        'external_url': track_details['tracks']['items'][0]['external_urls']['spotify'], 
+        'images': track_details['tracks']['items'][0]['album']['images']
     }
 
     return track_data    
