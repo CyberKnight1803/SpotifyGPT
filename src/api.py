@@ -26,15 +26,6 @@ async def api_health_check():
         "message": "Spotify API is connected successfully"
     }
 
-@router.get("/login")
-async def login():
-    pass
-
-@router.post("/refresh-token")
-def refresh_token():
-    pass 
-
-
 @router.post("/suggestions")
 async def get_suggestions(query: Query):
     """
