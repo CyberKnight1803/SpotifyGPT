@@ -5,11 +5,13 @@ steps:
       - '-t'
       - 'gcr.io/$PROJECT_ID/spotifygpt:$COMMIT_SHA'
       - .
+    logging: CLOUD_LOGGING_ONLY
     id: Build Container Image
   - name: gcr.io/cloud-builders/docker
     args:
       - push
       - 'gcr.io/$PROJECT_ID/spotifygpt:$COMMIT_SHA'
+    logging: CLOUD_LOGGING_ONLY
     id: Push Image to Container Registry
   - name: gcr.io/cloud-builders/gcloud
     args:
@@ -22,6 +24,7 @@ steps:
       - us-central1
       - '--platform'
       - managed
+    logging: CLOUD_LOGGING_ONLY
     id: Deploy Container on Google Cloud Run
 images:
   - 'gcr.io/$PROJECT_ID/spotifygpt:$COMMIT_SHA'
