@@ -6,15 +6,11 @@ steps:
       - 'gcr.io/$PROJECT_ID/spotifygpt:$COMMIT_SHA'
       - .
     id: Build Container Image
-    options:
-      logging: CLOUD_LOGGING_ONLY
   - name: gcr.io/cloud-builders/docker
     args:
       - push
       - 'gcr.io/$PROJECT_ID/spotifygpt:$COMMIT_SHA'
     id: Push Image to Container Registry
-    options:
-      logging: CLOUD_LOGGING_ONLY
   - name: gcr.io/cloud-builders/gcloud
     args:
       - run
