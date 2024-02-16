@@ -12,6 +12,7 @@ BASE_URI = os.getenv("BASE_URI")
 
 # OpenAI keys 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GPT_MODEL = "gpt-4-0125-preview"
 
 # Spotify keys
 SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")

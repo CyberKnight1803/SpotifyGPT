@@ -4,7 +4,8 @@ from openai import OpenAI
 from pydantic import BaseModel
 
 from config import (
-    OPENAI_API_KEY
+    OPENAI_API_KEY, 
+    GPT_MODEL
 )
 
 # Get OpenAI Client 
@@ -46,8 +47,11 @@ def get_gpt4_suggestions(user_prompt: str, num_suggestions: int):
 
     # Get reponse from gpt-4
     response = openai_client.chat.completions.create(
-        model="gpt-4", 
+        model=GPT_MODEL, 
         max_tokens=2000,
+        response_format={
+            'type': 'json_object'           # GPT-4 Turbo model can set JSON object as output format
+        },
         messages=[
             {
                 "role": "system", 
@@ -67,6 +71,6 @@ def get_gpt4_suggestions(user_prompt: str, num_suggestions: int):
 
     # Get dictionary format
     suggestions = json.loads(response.choices[0].message.content)
-    return suggestions
+    return suggestions['songs']
     
 

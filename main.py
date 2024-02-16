@@ -24,12 +24,6 @@ app.include_router(spotify_router)
 async def home_page():
     return "HOME PAGE"
 
-@app.get("/api-health-check")
-async def api_health_check():
-    return {
-        "message": "FastAPI is working correctly"
-    } 
-
 
 if __name__ == "__main__":
 
