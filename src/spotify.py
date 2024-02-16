@@ -95,18 +95,24 @@ async def callback(request: Request, response: Response):
 
         # print(type(data))
 
-        url = SPOTIFY_BASE_URL + "/me"
-        headers = {
-            "Authorization": f"Authorization: Bearer {data['access_token']}" 
-        }
+        # url = SPOTIFY_BASE_URL + "/me"
+        # headers = {
+        #     "Authorization": f"Authorization: Bearer {data['access_token']}" 
+        # }
 
-        user_data_response = requests.get(url, headers=headers)
-        user_data = user_data_response.json()
+        # user_data_response = requests.get(url, headers=headers)
 
-        data.update({'name': user_data['display_name']})
-        data.update({'email': user_data['email']})
-        data.update({'user_id': user_data['id']})
-        data.update({'user_profile': user_data['external_urls']['spotify']})
+        # if user_data_response.status_code == 200:
+        #     user_data = user_data_response.json()
+        #     data.update({'name': user_data['display_name']})
+        #     data.update({'email': user_data['email']})
+        #     data.update({'user_id': user_data['id']})
+        #     data.update({'user_profile': user_data['external_urls']['spotify']})
+        #     return data
+        
+        # else:
+        #     HTTPException(status_code=user_data_response.status_code, detail="Error in getting User details")
+
         return data
 
     else:
