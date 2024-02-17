@@ -7,6 +7,7 @@ load_dotenv()
 # Website 
 HOST = '0.0.0.0'
 PORT = 8000
+RESPONSE_TIME_LIMIT = 3600
 
 BASE_URI = os.getenv("BASE_URI")
 

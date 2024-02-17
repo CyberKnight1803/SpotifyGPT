@@ -1,19 +1,31 @@
 import os 
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from src.api import router as api_router
 from src.spotify import router as spotify_router
 
 from config import (
-    HOST, 
-    PORT
+    HOST, PORT, 
+    RESPONSE_TIME_LIMIT, 
 )
 
 
 # Create FastAPI app instance 
 app = FastAPI()
+
+# Cross-Origin Resource sharing
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True, 
+    allow_methods=["*"], 
+    allow_headers=["*"], 
+    max_age=RESPONSE_TIME_LIMIT
+)
+
 
 # Add Routers 
 app.include_router(api_router)
