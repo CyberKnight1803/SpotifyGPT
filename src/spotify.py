@@ -8,10 +8,6 @@ from pydantic import BaseModel
 from fastapi import APIRouter, HTTPException, Request, Response
 from fastapi.responses import RedirectResponse
 
-from utils import (
-    generate_random_string
-)
-
 from config import (
     BASE_URI,
     SPOTIFY_CLIENT_ID, 
@@ -21,7 +17,6 @@ from config import (
     SPOTIFY_BASE_URL
 )
 
-STATE_KEY = "spotify_auth_state"
 REDIRECT_URI = BASE_URI + "/spotify/callback"
 SEARCH_TYPE = "track"
 SEARCH_LIMIT = 1
