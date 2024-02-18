@@ -24,6 +24,7 @@ app.add_middleware(
     allow_methods=["*"], 
     allow_headers=["*"], 
     allow_credentials=True, 
+    expose_headers=["Access-Control-Allow-Origin"],
     max_age=RESPONSE_TIME_LIMIT
 )
 
