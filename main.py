@@ -37,7 +37,7 @@ app.add_middleware(
 @app.options('/{rest_of_path:path}')
 async def preflight_handler(request: Request, rest_of_path: str) -> Response:
     response = Response()
-    response.headers['Access-Control-Allow-Origin'] = ALLOWED_ORIGINS
+    response.headers['Access-Control-Allow-Origin'] = "https://tanishabisht.github.io"
     response.headers['Access-Control-Allow-Methods'] = 'POST, GET, DELETE, OPTIONS'
     response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
     return response
@@ -46,7 +46,7 @@ async def preflight_handler(request: Request, rest_of_path: str) -> Response:
 @app.middleware("http")
 async def add_CORS_header(request: Request, call_next):
     response = await call_next(request)
-    response.headers['Access-Control-Allow-Origin'] = ALLOWED_ORIGINS
+    response.headers['Access-Control-Allow-Origin'] = "https://tanishabisht.github.io"
     response.headers['Access-Control-Allow-Methods'] = 'POST, GET, DELETE, OPTIONS'
     response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
     return response
