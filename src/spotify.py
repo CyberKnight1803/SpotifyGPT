@@ -22,7 +22,6 @@ REDIRECT_URI = "https://tanishabisht.github.io/spotifygpt-frontend/"
 SEARCH_TYPE = "track"
 SEARCH_LIMIT = 1
 
-
 # Create router 
 router = APIRouter(
     prefix="/spotify"
@@ -38,7 +37,6 @@ async def api_health_check():
         "message": "Spotify API is connected successfully"
     }
 
-@router.options("/login")
 @router.get("/login")
 async def spotify_login(response: Response):
     """
