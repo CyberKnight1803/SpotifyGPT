@@ -14,40 +14,24 @@ from config import (
     RESPONSE_TIME_LIMIT, 
 )
 
-# CORS middleware
-
-origins = [
-    'http://localhost:3000', 
-    'http://0.0.0.0:3000', 
-    '*'
-]
-
-middleware = [
-    Middleware(
-        CORSMiddleware,
-        allow_origins=origins,
-        allow_methods=["*"], 
-        allow_headers=["*"], 
-        allow_credentials=True
-    )
-]
 
 # Create FastAPI app instance 
-app = FastAPI(middleware=middleware)
+app = FastAPI()
 
 # Cross-Origin Resource sharing
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"], 
-#     allow_methods=["*"], 
-#     allow_headers=["*"], 
-#     allow_credentials=True, 
-#     expose_headers=["Access-Control-Allow-Origin"],
-#     max_age=RESPONSE_TIME_LIMIT
-# )
+ALLOWED_ORIGINS = [
+    "https://tanishabisht.github.io",  # Add more origins as needed
+]
 
-# Salt to your taste
-ALLOWED_ORIGINS = '*'    # or 'foo.com', etc.
+# Add CORSMiddleware to the application
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,  # List of allowed origins
+    allow_credentials=True,  # Whether to support cookies
+    allow_methods=["*"],  # Allow all methods
+    allow_headers=["*"],  # Allow all headers
+)
+
 
 # handle CORS preflight requests
 @app.options('/{rest_of_path:path}')
