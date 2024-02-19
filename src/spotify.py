@@ -17,7 +17,8 @@ from config import (
     SPOTIFY_BASE_URL
 )
 
-REDIRECT_URI = BASE_URI + "/spotify/callback"
+# REDIRECT_URI = BASE_URI + "/spotify/callback"
+REDIRECT_URI = "https://tanishabisht.github.io/spotifygpt-frontend/"
 SEARCH_TYPE = "track"
 SEARCH_LIMIT = 1
 
