@@ -37,6 +37,7 @@ async def api_health_check():
         "message": "Spotify API is connected successfully"
     }
 
+@router.options("/login")
 @router.get("/login")
 async def spotify_login(response: Response):
     """
@@ -61,6 +62,7 @@ async def spotify_login(response: Response):
 
     return response
 
+@router.options("/callback")
 @router.get('/callback')
 async def callback(request: Request, response: Response):
 
